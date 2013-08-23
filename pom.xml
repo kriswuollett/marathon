@@ -18,7 +18,7 @@
         <mesos.version>0.14.0</mesos.version>
         <protobuf.version>2.4.1</protobuf.version>
         <akka.version>2.2.0</akka.version>
-        <spray.version>1.2-20130727</spray.version>
+        <spray.version>1.2-M8</spray.version>
         <json4s.version>3.2.5</json4s.version>
         <twitter-commons.version>0.0.44</twitter-commons.version>
 
@@ -107,16 +107,6 @@
             <groupId>io.spray</groupId>
             <artifactId>spray-client</artifactId>
             <version>${spray.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.spray</groupId>
-            <artifactId>spray-json_2.10</artifactId>
-            <version>1.2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>net.liftweb</groupId>
-            <artifactId>lift-json_2.10</artifactId>
-            <version>2.5.1</version>
         </dependency>
         <dependency>
             <groupId>io.spray</groupId>
