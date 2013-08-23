@@ -23,6 +23,7 @@ import spray.http.HttpRequest
 import spray.http.HttpResponse
 import scala.util.Success
 import scala.util.Failure
+import java.util.logging.Level
 
 class HttpEventActor extends Actor with ActorLogging with Json4sJacksonSupport {
 
@@ -37,7 +38,13 @@ class HttpEventActor extends Actor with ActorLogging with Json4sJacksonSupport {
   def receive = {
     case event: MarathonEvent => {
       log.info("POSTing to all endpoints.")
-      urls.foreach(x => post(x, event))
+      try {
+        urls.foreach(x => post(x, event))
+      } catch {
+        case t: Throwable => {
+          log.warning("Caught exception:" + t.getMessage)
+        }
+      }
     }
     case _ => {
       log.warning("Message not understood!")
@@ -65,42 +72,6 @@ class HttpEventActor extends Actor with ActorLogging with Json4sJacksonSupport {
     [AppDefinition]()
 
 }
-
-//case class Foo(val url: String, val e: ApiPostEvent)
-//
-//object HttpEventActor {
-//
-//
-//  def main(arg: Array[String]) {
-//
-//    val system =  ActorSystem("MarathonEvents")
-//    val foo = system.actorOf(Props[HttpEventActor])
-//
-//    val appDef = new AppDefinition
-//    appDef.cmd = "bash -x /tmp/blah"
-//    appDef.cpus = 1.5
-//    appDef.mem = 1024
-//    appDef.id = "stuff"
-//    appDef.instances = 5
-//    appDef.rackAffinity = 1.0
-//    appDef.nodeAffinity = 0.0
-//    appDef.env = Map("HADOOP_HOME" -> "/tmp/hadoop")
-//    appDef.uris = Seq("file:///tmp/pckg1.tgz", "file:///tmp/pckg2.tgz")
-//    foo ! new Foo("http://localhost:1500/",
-//      new ApiPostEvent("1.1.1.1", "/v1/app/scale", appDef))
-//  }
-//}
-
-
-
-
-
-
-
-
-
-
-
 
 
 
